@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/animated_asteroid.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "animation"
+length = 0.96
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78, 0.84, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 26.9549
+
+[node name="Enemy" type="RigidBody2D"]
+position = Vector2( 312.53, 300.808 )
+collision_layer = 0
+gravity_scale = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+min_speed = 150
+max_speed = 250
+
+[node name="enemy_visibility" type="VisibilityNotifier2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 16
+frame = 15
+region_rect = Rect2( 0, 0, 70, 70 )
+
+[node name="enemy_sprite" type="AnimationPlayer" parent="."]
+anims/animation = SubResource( 1 )
+
+[node name="enemy_collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+[connection signal="screen_exited" from="enemy_visibility" to="." method="_on_enemy_visibility_screen_exited"]

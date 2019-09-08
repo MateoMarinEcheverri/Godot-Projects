@@ -1,0 +1,75 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0000_idle_1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0001_idle_2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0002_idle_3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0027_jump_1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0028_jump_2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0028_jump_3.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0030_jump_4.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0006_walk_1.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0007_walk_2.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0008_walk_3.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0009_walk_4.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0010_walk_5.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0011_walk_6.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0022_dead_1.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0023_dead_2.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0024_dead_3.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0025_dead_4.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0026_dead_5.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0012_run_1.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0013_run_2.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0014_run_3.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0015_run_4.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0016_run_5.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/alien/PNG/alien_armor/armor__0017_run_6.png" type="Texture" id=25]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "walk",
+"speed": 100.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "run",
+"speed": 9.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 32.8612
+height = 57.3574
+
+[node name="Player" type="Area2D"]
+position = Vector2( 50, 873 )
+script = ExtResource( 1 )
+speed = 400
+
+[node name="player_sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="player_collision" type="CollisionShape2D" parent="."]
+position = Vector2( -2.69727, 0.517944 )
+scale = Vector2( 0.981434, 1.03479 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
